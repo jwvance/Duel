@@ -2,6 +2,9 @@
 #include <unordered_map>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+#include <random>
+#include <ctime>
 #include "AgeCards.hpp"
 #include "json.hpp"
 
@@ -25,7 +28,7 @@ AgeCard::AgeCard(std::string t, std::string n, unsigned int age, unsigned int co
 
 void AgeCard::PrintCard(std::string complexity){
     
-    std::cout << card_name << ", " << card_type << " card, Age " << card_age <<  ".";
+    std::cout << card_name << ", " << card_type << " card, Age " << card_age <<  "." << std::endl;
     
     if(complexity == "complex"){
         std::cout << "\nCost: " << 
@@ -54,14 +57,9 @@ std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
     std::vector<std::string> resourceCost, resourceReward;
 
     // read a JSON file
-    
     std::ifstream json_stream(fileName);
     json json_data;
-    try{
-        json_stream >> json_data;
-    }catch(std::exception &e) { std::cout << "FUCK" << e.what() << std::endl; }
-   
-    std::cout << "FUCK" << std::endl;
+    json_stream >> json_data;
 
     //prepare card deck
     std::vector<AgeCard> deck;
@@ -88,5 +86,9 @@ std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
         }
         deck.push_back(AgeCard(t, name, age, coinCost, resourceCost, chainCost, resourceReward, ch, VP, coinR, ss, sheild));
     } 
+
+    //shuffle deck for unique sets every play
+    std::default_random_engine gen(std::time(NULL));
+    std::shuffle(deck.begin(), deck.end(), gen);
     return deck;
 }
