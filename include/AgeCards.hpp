@@ -24,6 +24,22 @@ public:
 
     void PrintCard(std::string complexity = "");
 
+    std::string GetType(void) { return this->card_type; }
+    std::string GetName(void) { return this->card_name; }
+
+    void PrintInfo_Resource(void);
+    void PrintInfo_Science(void);
+    void PrintInfo_Military(void);
+    void PrintInfo_Civil(void);
+    void PrintInfo_Commercial(void);
+
+
+    /*Maybe a customized print for each type of card,
+    eg. PrintSci()
+        PrintMil()
+        PrintRes()
+    */
+
 };
 
 std::vector<AgeCard> InitAgeCardDeck(std::string fileName);

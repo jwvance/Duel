@@ -7,6 +7,7 @@
 #include <ctime>
 #include "AgeCards.hpp"
 #include "json.hpp"
+#include "termcolor.hpp"
 
 using json = nlohmann::json;
 
@@ -25,6 +26,52 @@ AgeCard::AgeCard(std::string t, std::string n, unsigned int age, unsigned int co
             card_sym(s),
             card_str(str)
         {};
+
+void AgeCard::PrintInfo_Resource(void){
+    std::cout << "  - " << termcolor::white << this->card_name << ", resource: ";
+    if(this->card_resourceReward.size() > 1){
+        std::cout << "2 " << this->card_resourceReward[0];
+    }else{
+        std::cout << this->card_resourceReward[0];
+    }
+    std::cout << termcolor::white << std::endl;
+}
+    
+void AgeCard::PrintInfo_Science(void){
+    std::cout << "  - " << termcolor::green << this->card_name << ", symbol: " << this->card_sym;
+    if(this->card_VP) std::cout << ", " << this->card_VP << " VPs";
+    if(this->card_chain != "noChain") std::cout << ", chain symbol: " << this->card_chain;
+    std::cout << termcolor::white << std:: endl;
+}
+
+void AgeCard::PrintInfo_Military(void){
+    std::cout << "  - " << termcolor::red << this->card_name << ", sheilds: " << this->card_str << termcolor::white << std::endl;
+}
+
+void AgeCard::PrintInfo_Civil(void){
+    std::cout << "  - " << termcolor::cyan << this->card_name << ", " << this->card_VP << " VPs" << termcolor::white << std::endl;
+}
+
+void AgeCard::PrintInfo_Commercial(void){
+    std::cout << "  - " << termcolor::yellow << this->card_name;
+
+    if(this->card_resourceReward.size()){
+        std::cout << ", resource:";
+        for(auto& rr : this->card_resourceReward){
+            //if discounted material
+            if(rr.back() == '1') std::cout << " " << rr.substr(0, rr.length()-2) << " costs 1 coin";
+            //std::cout << rr.back() << std::endl;
+
+            //if option of different free materials
+        }
+    }
+
+    if(this->card_coinReward) std::cout << ", worth " << this->card_coinReward << " coin";
+    if(this->card_chain != "noChain") std::cout << ", chain symbol: " << this->card_chain;
+
+    
+    std::cout << termcolor::white << std::endl;
+}
 
 void AgeCard::PrintCard(std::string complexity){
     
@@ -75,9 +122,19 @@ std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
             if(j.first == "name") name = j.second;
             if(j.first == "age") age = j.second;
             if(j.first == "coinCost") coinCost = j.second;
-            if(j.first == "resourceCost") resourceCost.push_back(j.second[0]);
+            if(j.first == "resourceCost") {
+                for(auto& resource : j.second){
+                    if(resource == "noResource") break;
+                    resourceCost.push_back(resource);
+                }
+            }
+            if(j.first == "resourceReward") {
+                for(auto& resource : j.second){
+                    if(resource == "noResource") break;
+                    resourceReward.push_back(resource);
+                }
+            }
             if(j.first == "chainCost") chainCost = j.second;
-            if(j.first == "resourceReward") resourceReward.push_back(j.second[0]);
             if(j.first == "chain") ch = j.second;
             if(j.first == "VP") VP = j.second;
             if(j.first == "coinReward") coinR = j.second;
@@ -85,6 +142,8 @@ std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
             if(j.first == "shield") sheild = j.second;
         }
         deck.push_back(AgeCard(t, name, age, coinCost, resourceCost, chainCost, resourceReward, ch, VP, coinR, ss, sheild));
+        resourceCost.clear();
+        resourceReward.clear();
     } 
 
     //shuffle deck for unique sets every play

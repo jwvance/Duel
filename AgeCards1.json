@@ -1,0 +1,349 @@
+{
+    "Cards": 
+    [
+        {
+        "type": "science",
+        "name": "Scriptorium",
+        "age": 1,
+        "coinCost": 2,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "book",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "quill",
+        "sheild": 0
+        },
+
+        {
+        "type": "science",
+        "name": "Pharmacist",
+        "age": 1,
+        "coinCost": 2,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "cog",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "mortar",
+        "sheild": 0
+        },
+    
+        {
+        "type": "science",
+        "name": "Apothecary",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["glass"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "noChain",
+        "VP": 1,
+        "coinReward": 0,
+        "sym": "wheel",
+        "sheild": 0
+        },
+    
+        {
+        "type": "science",
+        "name": "Workshop",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["papyrus"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "noChain",
+        "VP": 1,
+        "coinReward": 0,
+        "sym": "pendulum",
+        "sheild": 0
+        },
+ 
+        {
+        "type": "commercial",
+        "name": "Tavern",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "jug",
+        "VP": 0,
+        "coinReward": 4,
+        "sym": "noScience",
+        "sheild": 0
+        },
+    
+        {
+        "type": "commercial",
+        "name": "Wood Reserve",
+        "age": 1,
+        "coinCost": 3,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["lumber_1"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+    
+        {
+        "type": "commercial",
+        "name": "Stone Reserve",
+        "age": 1,
+        "coinCost": 3,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["stone_1"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+        
+        {
+        "type": "commercial",
+        "name": "Clay Reserve",
+        "age": 1,
+        "coinCost": 3,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["clay_1"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Stone Pit",
+        "age": 1,
+        "coinCost": 1,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["stone"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Clay Pit",
+        "age": 1,
+        "coinCost": 1,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["clay"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Quarry",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["stone"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Clay Pool",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["clay"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Logging Camp",
+        "age": 1,
+        "coinCost": 1,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["lumber"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Lumber Yard",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["lumber"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Glassworks",
+        "age": 1,
+        "coinCost": 1,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["glass"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "resource",
+        "name": "Press",
+        "age": 1,
+        "coinCost": 1,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["papyrus"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+
+        {
+        "type": "military",
+        "name": "Garrison",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["clay"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "sword",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 1
+        },
+
+        {
+        "type": "military",
+        "name": "Palisade",
+        "age": 1,
+        "coinCost": 2,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "castle",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 1
+        },
+
+        {
+        "type": "military",
+        "name": "Guard Tower",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "noChain",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 1
+        },
+        
+        {
+        "type": "military",
+        "name": "Stable",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["lumber"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "horseshoe",
+        "VP": 0,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 1
+        },
+        
+        {
+        "type": "civil",
+        "name": "Baths",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["stone"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "water",
+        "VP": 3,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+        
+        {
+        "type": "civil",
+        "name": "Altar",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "moon",
+        "VP": 3,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        },
+        
+        {
+        "type": "civil",
+        "name": "Theater",
+        "age": 1,
+        "coinCost": 0,
+        "resourceCost": ["noResource"],
+        "chainCost": "noChain",
+        "resourceReward": ["noResource"],
+        "chain": "mask",
+        "VP": 3,
+        "coinReward": 0,
+        "sym": "noScience",
+        "sheild": 0
+        }
+    ]
+}

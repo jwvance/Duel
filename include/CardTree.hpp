@@ -35,4 +35,7 @@ std::vector<Node*> InitFirstAge(std::vector<AgeCard> Age1);
 //return a vector<Node*> containing the available cards to draw
 std::vector<int> AvailableCards(const std::vector<Node*>& AgeCard);
 
+//print stats for available cards to draw
+void PrintInfo(const std::vector<Node*>& AgeCard, const std::vector<int> avail);
+
 #endif // CARD_TREE_HPP 
