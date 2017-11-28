@@ -12,10 +12,13 @@ int main(void){
     std::vector<Node*> firstAge = InitFirstAge(Age1);
     std::vector<Player> players = InitPlayers();
 
-    //std::cout << players[1].GetCoins() << std::endl;
-    
 
     std::vector<int> avail = AvailableCards(firstAge);
     PrintInfo(firstAge, avail);
+
+    std::vector<int> avail2 = AvailableCards(firstAge);
+    PrintInfo(firstAge, avail2);
+
+
 
 }

@@ -45,7 +45,7 @@ void AgeCard::PrintInfo_Science(void){
 }
 
 void AgeCard::PrintInfo_Military(void){
-    std::cout << "  - " << termcolor::red << this->card_name << ", sheilds: " << this->card_str << termcolor::white << std::endl;
+    std::cout << "  - " << termcolor::red << this->card_name << ", shields: " << this->card_str << termcolor::white << std::endl;
 }
 
 void AgeCard::PrintInfo_Civil(void){
@@ -59,7 +59,7 @@ void AgeCard::PrintInfo_Commercial(void){
         std::cout << ", resource:";
         for(auto& rr : this->card_resourceReward){
             //if discounted material
-            if(rr.back() == '1') std::cout << " " << rr.substr(0, rr.length()-2) << " costs 1 coin";
+            if(rr.back() == '1') std::cout << " " << rr.substr(0, rr.length()-2) << ", costs 1 coin";
             //std::cout << rr.back() << std::endl;
 
             //if option of different free materials
@@ -93,14 +93,14 @@ void AgeCard::PrintCard(std::string complexity){
         if(card_VP != 0) { std::cout << card_VP << " VPs, "; }
         if(card_coinReward != 0 ) { std::cout << card_coinReward << " coins, "; }
         if(card_sym != "noScience") { std::cout << "the " << card_sym << " symbol, "; }
-        if(card_str != 0) { std::cout << card_str << " sheilds."; }
+        if(card_str != 0) { std::cout << card_str << " shields."; }
     }
 
 }
 
 std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
     std::string t, name, chainCost, ch, ss;
-    unsigned int age, coinCost, VP, coinR, sheild;
+    unsigned int age, coinCost, VP, coinR, shield;
     std::vector<std::string> resourceCost, resourceReward;
 
     // read a JSON file
@@ -139,15 +139,15 @@ std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
             if(j.first == "VP") VP = j.second;
             if(j.first == "coinReward") coinR = j.second;
             if(j.first == "sym") ss = j.second;
-            if(j.first == "shield") sheild = j.second;
+            if(j.first == "shield") shield = j.second;
         }
-        deck.push_back(AgeCard(t, name, age, coinCost, resourceCost, chainCost, resourceReward, ch, VP, coinR, ss, sheild));
+        deck.push_back(AgeCard(t, name, age, coinCost, resourceCost, chainCost, resourceReward, ch, VP, coinR, ss, shield));
         resourceCost.clear();
         resourceReward.clear();
     } 
 
     //shuffle deck for unique sets every play
-    std::default_random_engine gen(std::time(NULL));
-    std::shuffle(deck.begin(), deck.end(), gen);
+    //std::default_random_engine gen(std::time(NULL));
+    //std::shuffle(deck.begin(), deck.end(), gen);
     return deck;
 }

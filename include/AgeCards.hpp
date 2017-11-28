@@ -7,7 +7,7 @@
 /*
 enum cardType { rawResource, mfdResource, civil, science, commercial, military, guild };
 enum scienceSym { noScience, globe, scale, sundial, mortar, pendulum, quill, wheel };
-enum militaryStr { noSheild, oneShield, twoSheild, threeSheild };
+enum militaryStr { noshield, oneShield, twoshield, threeshield };
 enum resource { noResource, lumber, stone, clay, glass, papyrus }; 
 enum chain { noChain, horseshoe, sword, castle, target, helmet, book, cog, lyre, 
              lamp, mask, pillar, moon, sun, water, temple, jug, barrel };
@@ -26,19 +26,16 @@ public:
 
     std::string GetType(void) { return this->card_type; }
     std::string GetName(void) { return this->card_name; }
+    unsigned int GetCoin(void) { return this->card_coinReward; }
+    std::string GetChain(void) { return this->card_chainCost; }
+    std::vector<std::string> GetResCost(void) { return this->card_resourceCost; }
+    std::vector<std::string> GetResRew(void) { return this->card_resourceReward; }
 
     void PrintInfo_Resource(void);
     void PrintInfo_Science(void);
     void PrintInfo_Military(void);
     void PrintInfo_Civil(void);
     void PrintInfo_Commercial(void);
-
-
-    /*Maybe a customized print for each type of card,
-    eg. PrintSci()
-        PrintMil()
-        PrintRes()
-    */
 
 };
 

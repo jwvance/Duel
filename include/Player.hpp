@@ -10,6 +10,9 @@ class Player {
     std::vector<AgeCard*> cards;
     //std::vector<Wonders*> Wonders;
     int coins;
+    std::vector<std::string> chains;
+    std::vector<std::string> resources;
+
 
 public:
     Player();
@@ -20,6 +23,9 @@ public:
     std::vector<AgeCard*> GetCards(void);
     void AddCard(AgeCard* card);
 
+    bool hasChain(std::string chain);
+    std::vector<std::string> hasResources(std::vector<std::string> resources);
+    bool hasCoin(int cost);
 
 };
 

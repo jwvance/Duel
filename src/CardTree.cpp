@@ -9,6 +9,7 @@ void Node::SetPair(int first, int second){
     this->covers = std::make_pair(first,second);
 }
 
+//each card has a pair of numbers which represent the cards covering it. -1 means no card
 std::vector<Node*> InitFirstAge(std::vector<AgeCard> Age1){
     //assign proper links between cards
     std::vector<Node*> Age1Tree(20);
@@ -44,7 +45,7 @@ std::vector<Node*> InitFirstAge(std::vector<AgeCard> Age1){
 std::vector<int> AvailableCards(const std::vector<Node*>& AgeCard){
     std::vector<int> avail;
     for(auto & card : AgeCard){
-        if(card->GetPair() == std::make_pair(-1,-1)){
+        if(card->GetPair() == std::make_pair(-1,-1) && card->isAvailable){
             avail.push_back(&card - &AgeCard[0]);
         }
     }
@@ -64,33 +65,63 @@ void PrintInfo(const std::vector<Node*>& AgeCard, const std::vector<int> avail){
     }
 }
 
-//create print function to print card details
-//eg print("names")
-//eg print("symbol")
-//eg print("military strength")
+//traverses the cards in play and updates the necessary pair values
+bool UncoverCard(std::string cardName, std::vector<Node*>& age){
 
+    bool cardFound = false;
+    int index;
+    //first locate index of cardName
+    for(auto& card : age){
+        if(card->ac.GetName() == cardName){
+            index = &card - &age[0];
+            cardFound = true;
+            break;
+        }
+    }
 
+    //then search tree for pairs that contain that index,
+    //if part of a pair matches, update pair value to -1
+    for(auto& card : age){
+        if(card->GetPair().first == index){
+            card->SetPair(-1,card->GetPair().second);
+        }
+        if(card->GetPair().second == index){
+            card->SetPair(card->GetPair().first,-1);
+        }
+        if(card->GetPair() == std::make_pair(-1,-1)){
+            card->isVisable = true;
+        }
+    }
+    return cardFound;
+}
 
+//add card named cardName to player's hand if they can afford it, mark isAvailable as false
+bool PickCard(std::string cardName, Player& player, std::vector<Node*>& age){
+    //first make sure card is available, check status of isAvailable and num pair
+    for(auto& card : age){
+        //player can take if card is available and nothing is covering it
+        if(card->ac.GetName() == cardName && card->isAvailable && card->GetPair() == std::make_pair(-1,-1)){    
+            //chain cost
+            bool canAquire = player.hasChain(card->ac.GetChain());
 
-
-//card cover pattern (cover represents the 1 or 2 cards that protects cards underneath it from being used)
-//the vector Age1Tree contains all of the cards for the first age
-//each card has a pair of numbers which represent the cards covering it. A -1 means no card.
-
-//r00 (r10, r11)
-//r01(r11,r12)
-
-//r10(r20,r21)
-//r11(r21,r22)
-//r12(r22,r23)
-
-//r20(r30,r31)
-//r21(r31,r32)
-//r22(r32,r33)
-//r23(r33,r34)
-
-//r30(r40,r41)
-//r31(r41,r42)
-//r32(r42,r43)
-//r33(r43,r44)
-//r34(r44,r45)
+            //compare resources owned by player to required resources. return addtional resources needed
+            std::vector<std::string> missingRes = player.hasResources(card->ac.GetResCost());
+            
+            //TODO:
+            //coin cost
+            //member function of player class
+            //bool player.hasCoin(COST?);
+            
+            //if proper resources to buy:
+            //add card to player's hand, add coin, resources
+            player.AddCard(&(card->ac)); 
+            
+            //uncover free cards on the table
+            UncoverCard(cardName, age);
+        
+            card->isAvailable = false;
+            return true;
+        }
+    }
+    return false;    
+}
