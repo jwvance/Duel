@@ -102,7 +102,7 @@ bool PickCard(std::string cardName, Player& player, std::vector<Node*>& age){
         //player can take if card is available and nothing is covering it
         if(card->ac.GetName() == cardName && card->isAvailable && card->GetPair() == std::make_pair(-1,-1)){    
             //chain cost
-            bool canAquire = player.hasChain(card->ac.GetChain());
+            bool canAquire = player.hasChain(card->ac.GetChainCost());
 
             //compare resources owned by player to required resources. return addtional resources needed
             std::vector<std::string> missingRes = player.hasResources(card->ac.GetResCost());

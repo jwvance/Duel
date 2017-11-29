@@ -27,7 +27,9 @@ public:
     std::string GetType(void) { return this->card_type; }
     std::string GetName(void) { return this->card_name; }
     unsigned int GetCoin(void) { return this->card_coinReward; }
-    std::string GetChain(void) { return this->card_chainCost; }
+    unsigned int GetShields(void) { return this->card_str; }
+    std::string GetChainCost(void) { return this->card_chainCost; }
+    std::string GetChainRew(void) { return this->card_chain; }
     std::vector<std::string> GetResCost(void) { return this->card_resourceCost; }
     std::vector<std::string> GetResRew(void) { return this->card_resourceReward; }
 
