@@ -17,14 +17,19 @@ class Player {
 public:
     Player();
 
+    std::string playerName;
+
     int GetCoins(void);
     void UpdateCoins(int coin);
+
+    std::vector<std::string> GetResources(void);
+    std::vector<std::string> GetChains(void);
 
     std::vector<AgeCard*> GetCards(void);
     void AddCard(AgeCard* card);
 
     bool hasChain(std::string chain);
-    std::vector<std::string> hasResources(std::vector<std::string> resources);
+    std::pair<bool, std::vector<std::string>> hasResources(std::vector<std::string> resources);
     bool hasCoin(int cost);
 
 };

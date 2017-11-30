@@ -12,12 +12,12 @@ void Node::SetPair(int first, int second){
 //each card has a pair of numbers which represent the cards covering it. -1 means no card
 std::vector<Node*> InitFirstAge(std::vector<AgeCard> Age1){
     //assign proper links between cards
-    std::vector<Node*> Age1Tree(20);
+    std::vector<Node*> Age1Tree(23);
 
     int i = 0;
     for(auto& card : Age1){
         Age1Tree[i++] = new Node(card);
-        if(i == 20) break;
+        //if(i == 20) break;
     }
 
     Age1Tree[0]->SetPair(2,3);
@@ -37,6 +37,11 @@ std::vector<Node*> InitFirstAge(std::vector<AgeCard> Age1){
     Age1Tree[11]->SetPair(16,17);
     Age1Tree[12]->SetPair(17,18);
     Age1Tree[13]->SetPair(18,19);
+
+    //keep in deck but unavailable (for testing)
+    Age1Tree[20]->isAvailable = false;
+    Age1Tree[21]->isAvailable = false;
+    Age1Tree[22]->isAvailable = false;
 
     return Age1Tree;
 }
@@ -96,32 +101,82 @@ bool UncoverCard(std::string cardName, std::vector<Node*>& age){
 }
 
 //add card named cardName to player's hand if they can afford it, mark isAvailable as false
-bool PickCard(std::string cardName, Player& player, std::vector<Node*>& age){
+bool PickCard(std::string cardName, Player& player, Player& opponent, std::vector<Node*>& age){
     //first make sure card is available, check status of isAvailable and num pair
     for(auto& card : age){
         //player can take if card is available and nothing is covering it
         if(card->ac.GetName() == cardName && card->isAvailable && card->GetPair() == std::make_pair(-1,-1)){    
-            //chain cost
-            bool canAquire = player.hasChain(card->ac.GetChainCost());
+            bool canAquire = false, hasChain = false;   //flag for tracking how player will pay for card
+            int cost = 0;    //tracks amount player has pay bank for resources if they don't own them
 
-            //compare resources owned by player to required resources. return addtional resources needed
-            std::vector<std::string> missingRes = player.hasResources(card->ac.GetResCost());
+            //check if can aquire with chain, then pay nothing
+            hasChain = canAquire = player.hasChain(card->ac.GetChainCost());
+
+            //check if can aquire with resources
+            if(!canAquire){
+                //compare resources owned by player to required resources. return addtional resources needed
+                std::vector<std::string> missingRes;
+                std::pair<bool, std::vector<std::string>> resPair = player.hasResources(card->ac.GetResCost());
+                canAquire = resPair.first;
+                missingRes = resPair.second;
+
+                //if player doesn't have resources, calculate coin cost of those resources
+                if(!canAquire){
+                    std::vector<std::string> opponentRes = opponent.GetResources();
+                    for(auto& missing : missingRes){
+
+                        bool hasGold = false;
+                        //find any gold cards for the current resource and apply discount
+                        for(auto& goldCard : player.GetResources()){
+                            if(goldCard == missing + "_1"){
+                                hasGold = true;
+                                break;
+                            }
+                        }
+                        if(hasGold){
+                            cost += 1;
+                            continue;
+                        }
+
+                        bool hasRes = false;    //flag to check if opponent has resource
+                        //check if opponent has resources, then cost += 3
+                        for(auto& oppRes : opponentRes){
+                            if(missing == oppRes){       //compare player resource to opponent resource
+                                cost += 3;
+                                hasRes = true;
+                                break;
+                            }
+                        }
+                        if(!hasRes){    //if opponent doesn't have resource
+                            cost += 2;
+                        }
+                    }
+                }
+            }
+
+            //calculate total coin
+            cost += card->ac.GetCoinCost();
+            canAquire = player.hasCoin(cost);
+
+            //player doesn't pay for card if they have chain
+            if(canAquire && !hasChain){
+                //subtract cost from player's total
+                player.UpdateCoins(-cost);
+            }
+
+            //finally, add card to player's hand since they can afford it
+            if(canAquire){
+                //add card to player's hand, add coin, resources
+                player.AddCard(&(card->ac)); 
+                
+                //uncover free cards on the table
+                UncoverCard(cardName, age);
             
-            //TODO:
-            //coin cost
-            //member function of player class
-            //bool player.hasCoin(COST?);
-            
-            //if proper resources to buy:
-            //add card to player's hand, add coin, resources
-            player.AddCard(&(card->ac)); 
-            
-            //uncover free cards on the table
-            UncoverCard(cardName, age);
-        
-            card->isAvailable = false;
-            return true;
+                card->isAvailable = false;
+                return true;
+            }
+            return false; //not enough coins
         }
     }
-    return false;    
+    return false;  //card not available   
 }

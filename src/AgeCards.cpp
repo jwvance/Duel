@@ -147,7 +147,7 @@ std::vector<AgeCard> InitAgeCardDeck(std::string fileName){
     } 
 
     //shuffle deck for unique sets every play
-    //std::default_random_engine gen(std::time(NULL));
-    //std::shuffle(deck.begin(), deck.end(), gen);
+    std::default_random_engine gen(std::time(NULL));
+    std::shuffle(deck.begin(), deck.end(), gen);
     return deck;
 }
