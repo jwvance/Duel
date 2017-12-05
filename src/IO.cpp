@@ -13,20 +13,4 @@ void PrintTitleScreen(void){
     }else{
         std::cout << "file open failed" << std::endl;
     }     
-   
-}
-
-bool SetUpPlayerNames(std::vector<Player>& players){
-    bool p1 = false, p2 = false;
-    std::string inStr;
-
-    std::cout << "Enter name for player 1: ";
-    getline(std::cin, inStr, '\n');
-    players[0].playerName = inStr;
-
-    std::cout << "Enter name for player 2: ";
-    getline(std::cin, inStr, '\n');
-    players[1].playerName = inStr;
-
-    return true;
 }

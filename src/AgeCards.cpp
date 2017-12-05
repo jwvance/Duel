@@ -28,7 +28,7 @@ AgeCard::AgeCard(std::string t, std::string n, unsigned int age, unsigned int co
         {};
 
 void AgeCard::PrintInfo_Resource(void){
-    std::cout << "  - " << termcolor::white << this->card_name << ", resource: ";
+    std::cout << termcolor::white << this->card_name << ", resource: ";
     if(this->card_resourceReward.size() > 1){
         std::cout << "2 " << this->card_resourceReward[0];
     }else{
@@ -38,31 +38,30 @@ void AgeCard::PrintInfo_Resource(void){
 }
     
 void AgeCard::PrintInfo_Science(void){
-    std::cout << "  - " << termcolor::green << this->card_name << ", symbol: " << this->card_sym;
+    std::cout << termcolor::green << this->card_name << ", symbol: " << this->card_sym;
     if(this->card_VP) std::cout << ", " << this->card_VP << " VPs";
     if(this->card_chain != "noChain") std::cout << ", chain symbol: " << this->card_chain;
     std::cout << termcolor::white << std:: endl;
 }
 
 void AgeCard::PrintInfo_Military(void){
-    std::cout << "  - " << termcolor::red << this->card_name << ", shields: " << this->card_str << termcolor::white << std::endl;
+    std::cout << termcolor::red << this->card_name << ", shields: " << this->card_str << termcolor::white << std::endl;
 }
 
 void AgeCard::PrintInfo_Civil(void){
-    std::cout << "  - " << termcolor::cyan << this->card_name << ", " << this->card_VP << " VPs" << termcolor::white << std::endl;
+    std::cout << termcolor::cyan << this->card_name << ", " << this->card_VP << " VPs" << termcolor::white << std::endl;
 }
 
 void AgeCard::PrintInfo_Commercial(void){
-    std::cout << "  - " << termcolor::yellow << this->card_name;
+    std::cout << termcolor::yellow << this->card_name;
 
     if(this->card_resourceReward.size()){
         std::cout << ", resource:";
         for(auto& rr : this->card_resourceReward){
             //if discounted material
-            if(rr.back() == '1') std::cout << " " << rr.substr(0, rr.length()-2) << ", costs 1 coin";
-            //std::cout << rr.back() << std::endl;
+            if(rr.back() == '1') std::cout << " " << rr.substr(0, rr.length()-2) << " costs 1 coin";
 
-            //if option of different free materials
+            //TODO: if option of different free materials
         }
     }
 

@@ -58,9 +58,9 @@ std::vector<int> AvailableCards(const std::vector<Node*>& AgeCard){
 }
 
 void PrintInfo(const std::vector<Node*>& AgeCard, const std::vector<int> avail){
-    std::cout << "Available cards:" << std::endl;
-
+    int count = 1;
     for(auto& card : avail){
+        std::cout << "  " << count++ << ") ";
         if(AgeCard[card]->ac.GetType() == "resource") AgeCard[card]->ac.PrintInfo_Resource();
         if(AgeCard[card]->ac.GetType() == "science") AgeCard[card]->ac.PrintInfo_Science();
         if(AgeCard[card]->ac.GetType() == "military") AgeCard[card]->ac.PrintInfo_Military();

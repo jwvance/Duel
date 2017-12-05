@@ -12,12 +12,13 @@ class Player {
     int coins;
     std::vector<std::string> chains;
     std::vector<std::string> resources;
-
+    std::string playerName;
 
 public:
     Player();
 
-    std::string playerName;
+    void SetName(std::string newName);
+    std::string GetName(void);
 
     int GetCoins(void);
     void UpdateCoins(int coin);

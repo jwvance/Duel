@@ -3,6 +3,15 @@
 
 Player::Player() {
     this->coins = 7;
+    this->playerName = "player";
+}
+
+std::string Player::GetName(void){
+    return this->playerName;
+}
+
+void Player::SetName(std::string newName){
+    this->playerName = newName;
 }
 
 int Player::GetCoins(void){
