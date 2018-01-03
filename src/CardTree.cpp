@@ -66,7 +66,6 @@ void PrintInfo(const std::vector<Node*>& AgeCard, const std::vector<int> avail){
         if(AgeCard[card]->ac.GetType() == "military") AgeCard[card]->ac.PrintInfo_Military();
         if(AgeCard[card]->ac.GetType() == "civil") AgeCard[card]->ac.PrintInfo_Civil();
         if(AgeCard[card]->ac.GetType() == "commercial") AgeCard[card]->ac.PrintInfo_Commercial();
-
     }
 }
 

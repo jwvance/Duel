@@ -32,6 +32,8 @@ public:
     void ChangeTurn(void);
     bool SetUpPlayerNames(void);
     void ChooseCard(void);
+    void PrintTurn(void);
+    int ChooseAction(void);
 };
 
 

@@ -2,46 +2,69 @@
 #include "Board.hpp"
 
 enum States { one };
+enum Actions { BUY = 1, SELL, BUILD };
 
 int main(void){
 
+    Board board;   //init board
+    enum Actions ACTION = BUY;
     PrintTitleScreen();
-
-    Board board;
-
-    enum States state = one;
-
-    
-
     board.SetUpPlayerNames();
-    
-    //need to print out player's coins, resources, and VP
-    board.ChooseCard();
-    board.ChangeTurn();
-    board.ChooseCard();
 
+    PrintMilitaryStanding(0);
 
     //ChooseWonders()
     //RandomizeTurn()
     //then enter state machine
         //enter state InitAge where the new ages are set up. Board has enum for current Age
 
-    //to end program, where ever input is collect, include an option to terminate program with ctrl-c
+    //to end program, whenever input is collected, include an option to terminate program with ctrl-c
 
-    /*
-    while(1){
-        switch (state){
-            case one:
-
+    //main loop
+    while(1) { 
+        //need to print current turn
+        board.PrintTurn();
+        
+        
+        ////need to print out player's coins, resources, and VP
+        
+        //check input for what player wants to do
+        ACTION = static_cast<Actions>(board.ChooseAction());
+        switch(ACTION) {
+            case BUY:
+                board.ChooseCard();     //TODO: after choosing card, say "aquired 'name of card'", next player's turn.
                 break;
 
-            default:
-                ;
+            case SELL:
+                std::cout << "selling" << std::endl;
+                break;
 
-        }
+            case BUILD:
+                std::cout << "building" << std::endl;
+                break;            
             
+        }
+
+        //let player choose between three keywords: buy, build, or sell
+        //aquire info by typing: info 'cards' / 'wonders' / 'status'
+            //eg:
+                //Science: card 1, card 2
+                //Military: card 1, card 2
+                //gold cards: card 1
+
+
+            //eg: military visualization
+
+
+
+
+
+        
+        board.ChangeTurn();
     }
-    */
+
+
+    
 
 
 
@@ -50,8 +73,7 @@ int main(void){
     //PickCard <---> Buy, Build, Sell
 
     //endgame state: AddVPs
-    //                                                    
+                                          
     
-    //add error message if player tries to pick unavailable card
 
 }

@@ -5,18 +5,14 @@
 #include <iostream>
 #include "Player.hpp"
 
-class IO{
-
-
-
-public:
-
-
-
-};
+//Read which number the player chooses
+int CollectInput(int numOptions);
 
 //opens asciiTitle.txt and prints the contents to the console
 void PrintTitleScreen(void);
+
+//prints a visual that indicates the position of the military pawn
+void PrintMilitaryStanding(int PawnPosition);
 // TODO:
 // These SHOW functions could be implemented in IO to prevent player from getting too cluttered
 // ShowCards() print out cards that player holds 
