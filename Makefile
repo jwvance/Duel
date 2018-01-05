@@ -22,6 +22,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 test:
 	$(CC) $(CFLAGS) tests/gtest.cpp $(INC) src/Player.cpp src/CardTree.cpp src/AgeCards.cpp -I /Users/jason/googletest/googletest/include $(LIB) -o bin/gtest
+	./bin/gtest
 
 clean:
 	@echo " Cleaning..."; 

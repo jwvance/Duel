@@ -33,6 +33,7 @@ public:
     std::pair<bool, std::vector<std::string>> hasResources(std::vector<std::string> resources);
     bool hasCoin(int cost);
 
+    int GetSellBonus(void);
 };
 
 std::vector<Player> InitPlayers(void);

@@ -43,4 +43,7 @@ bool UncoverCard(std::string cardName, std::vector<Node*>& age);
 //pick up card specified by player, adds it to their hand, updates gameboard
 bool PickCard(std::string cardName, Player& player, Player& opponent, std::vector<Node*>& age);
 
+//sell card named cardName, mark isAvailable as false
+bool SellCard(std::string cardName, Player& player, std::vector<Node*>& age);
+
 #endif // CARD_TREE_HPP 

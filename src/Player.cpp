@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include <iostream>
 
 Player::Player() {
     this->coins = 7;
@@ -82,6 +82,15 @@ std::pair<bool, std::vector<std::string>> Player::hasResources(std::vector<std::
 bool Player::hasCoin(int cost){
     if(this->coins >= cost) return true;
     return false;
+}
+
+int Player::GetSellBonus(void){
+    int BASE_PRICE = 2;
+    int sellBonus = 0;
+    for(auto& card : this->cards){
+        if(card->GetType() == "commercial") sellBonus++;     
+    }
+    return sellBonus + BASE_PRICE;
 }
 
 //create vector of type player, fill with two instances of player

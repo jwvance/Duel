@@ -8,10 +8,11 @@ int main(void){
 
     Board board;   //init board
     enum Actions ACTION = BUY;
-    PrintTitleScreen();
+    PrintSplashScreen("asciiTitle.txt", 3);   //print title screen
     board.SetUpPlayerNames();
 
-    PrintMilitaryStanding(0);
+    PrintSplashScreen("Age1Splash.txt", 2);   //print intro to age 1
+    
 
     //ChooseWonders()
     //RandomizeTurn()
@@ -36,7 +37,10 @@ int main(void){
                 break;
 
             case SELL:
-                std::cout << "selling" << std::endl;
+                //std::cout << "Choose a card to sell for " << std::endl;
+                board.SellCard();
+                //TODO: finish SellCard()
+
                 break;
 
             case BUILD:

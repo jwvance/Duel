@@ -71,7 +71,6 @@ void PrintInfo(const std::vector<Node*>& AgeCard, const std::vector<int> avail){
 
 //traverses the cards in play and updates the necessary pair values
 bool UncoverCard(std::string cardName, std::vector<Node*>& age){
-
     bool cardFound = false;
     int index;
     //first locate index of cardName
@@ -178,4 +177,17 @@ bool PickCard(std::string cardName, Player& player, Player& opponent, std::vecto
         }
     }
     return false;  //card not available   
+}
+
+bool SellCard(std::string cardName, Player& player, std::vector<Node*>& age){
+    for(auto& card : age){
+        //player can sell if card is available and nothing is covering it
+        if(card->ac.GetName() == cardName && card->isAvailable && card->GetPair() == std::make_pair(-1,-1)){
+            UncoverCard(cardName, age);
+            card->isAvailable = false;
+            player.UpdateCoins(player.GetSellBonus());
+            return true;
+        }
+    }
+    return false;
 }

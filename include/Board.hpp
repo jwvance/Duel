@@ -6,6 +6,8 @@
 #include "Player.hpp"
 #include "IO.hpp"
 #include <vector>
+#include <chrono>
+#include <thread>
 
 enum Ages { First, Second, Third };
 
@@ -32,8 +34,11 @@ public:
     void ChangeTurn(void);
     bool SetUpPlayerNames(void);
     void ChooseCard(void);
+    void SellCard(void);
     void PrintTurn(void);
     int ChooseAction(void);
+    void UpdateMilitaryPawn(std::string cardName, std::vector<AgeCard> cards);
+    
 };
 
 

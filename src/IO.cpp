@@ -1,5 +1,11 @@
 #include "IO.hpp"
 
+void PrintStringWithDelay(std::string str, int delay){
+     for(auto& sym : str){
+        std::cout << sym << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+    } 
+}
 
 int CollectInput(int numOptions){
     //recieve number as input
@@ -16,14 +22,15 @@ int CollectInput(int numOptions){
     return myNum;
 }
 
-void PrintTitleScreen(void){
+void PrintSplashScreen(std::string fileName, int delay){
     std::ifstream file;
-    file.open("asciiTitle.txt", std::ios::in);
+    file.open(fileName, std::ios::in);
     
+    int speed = 0;
     std::string line;
-    if (file){ // same as: if (myfile.good())
-        while (getline(file, line)){ // same as: while (getline( myfile, line ).good())
-            std::cout << line << std::endl;
+    if (file){ 
+        while (getline(file, line)){ 
+            PrintStringWithDelay(line + "\n", delay - (speed / 3));
         }
         file.close();
     }else{
@@ -40,12 +47,12 @@ void PrintMilitaryStanding(int PawnPosition){
     //3  = -9
     //7  = -8
     //11 = -7
-    std::cout << "                  --- MILITARY STATUS --- " << std::endl;
-    std::cout << "◤▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬◥" << std::endl;
+    std::cout << "                  ";
+    PrintStringWithDelay("--- MILITARY STATUS --- \n", 25);
+    PrintStringWithDelay("◤▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬◥\n", 1);
     while(PawnShift--){ std::cout << " "; }
     std::cout << "◆" << std::endl;
-    std::cout << "  ✪  ◇  ◇  ◇  ◇  ◇  ◇  ◇  ◇  Ω  ◇  ◇  ◇  ◇  ◇  ◇  ◇  ◇  ✪ " << std::endl;
+    PrintStringWithDelay("  ✪  ◇  ◇  ◇  ◇  ◇  ◇  ◇  ◇  Ω  ◇  ◇  ◇  ◇  ◇  ◇  ◇  ◇  ✪\n", 5);
     //std::cout << "      [-5 coin]   [-2 coin]                       [-2 coin]   [-5 coin]     " << std::endl;
-    std::cout << "◣▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬◢\n" << std::endl;
-
+    PrintStringWithDelay("◣▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬◢\n\n", 1);
 }

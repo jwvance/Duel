@@ -203,32 +203,32 @@ TEST_F(PlayerTest, CollectChain)
 }
 TEST_F(PlayerTest, GoldDiscount)
 {
-    //check that gold discount applys to players
-    for(auto& card : firstAge){  //first aquire gold stone card for player[0]
-        if(card->ac.GetName() == "Stone Pit"){  
-            EXPECT_TRUE(PickCard("Stone Pit", players[1], players[0], firstAge)); 
-        }
-        if(card->ac.GetName() == "Stone Reserve"){  //player 0 gets stone for 1 gold
-            EXPECT_TRUE(PickCard("Stone Reserve", players[0], players[1], firstAge)); 
-        }
-    }
-    for(auto& card : firstAge){   //then check if discount works
-        if(card->ac.GetName() == "Baths"){  //player 0 buys stone
-            EXPECT_TRUE(PickCard("Baths", players[0], players[1], firstAge)); 
-        }
-    }
+    //check that gold discount applys when other players own resources
+    EXPECT_TRUE(PickCard("Stone Pit", players[1], players[0], firstAge));  //aquire stone resource for player[1]
+    EXPECT_TRUE(PickCard("Stone Reserve", players[0], players[1], firstAge));  //player[0] aquires stone_1 card
+    EXPECT_TRUE(PickCard("Baths", players[0], players[1], firstAge));  //then check if discount works even when opponent has stone
     EXPECT_EQ(players[0].GetCoins(), 3);
 }
-//test gold card logic
+TEST_F(PlayerTest, GoldBonus)
+{
+    //check that gold sell bonus is correctly calculated
+    EXPECT_EQ(players[0].GetSellBonus(), 0);  //aquire gold card
+    EXPECT_TRUE(PickCard("Wood Reserve", players[0], players[1], firstAge)); 
+    EXPECT_EQ(players[0].GetSellBonus(), 1);  //aquire second gold card
+    EXPECT_TRUE(PickCard("Stone Reserve", players[0], players[1], firstAge)); 
+    EXPECT_EQ(players[0].GetSellBonus(), 2); 
+}
     
 
+//TODO:check militaryPawn is updated correctly
 
 
+/*
 TEST(IOTest, title)
 {
     PrintTitleScreen();
 }
-
+*/
 
 
 
